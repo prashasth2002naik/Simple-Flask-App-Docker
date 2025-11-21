@@ -13,4 +13,4 @@ COPY . ./app
 
 EXPOSE 5000
 
-CMD ["python", "product_list_app:app"]
+CMD ["python3", "product_list_app:app"]
