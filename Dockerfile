@@ -1,16 +1,24 @@
+# Use a lightweight official Python image
 FROM python:3.9-slim-buster
 
-LABEL Name="Python Flask Demo App" Version=1.4.2
-LABEL org.opencontainers.image.source = "https://github.com/benc-uk/python-demoapp"
-
-ARG srcDir=src
+# Set a working directory in the container
 WORKDIR /app
+
+# Copy only requirements first (for better caching)
 COPY requirements.txt .
+
+# Install dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY product_list_app.py .
+# Copy the rest of your app code
 COPY . .
 
-EXPOSE 5000
+# Expose the port that your Flask app runs on
+EXPOSE 5070
 
-CMD ["python3", "product_list_app:app"]
+# Set environment variable for Flask
+ENV FLASK_APP=product_list_app.py
+ENV FLASK_RUN_HOST=0.0.0.0
+
+# Run the Flask app
+CMD ["flask", "run", "--port", "5070"]
