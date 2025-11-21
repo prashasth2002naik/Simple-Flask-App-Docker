@@ -1,0 +1,22 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskmonitor
+  labels:
+    app: flaskmonitor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flaskmonitor
+  template:
+    metadata:
+      labels:
+        app: flaskmonitor
+    spec:
+      containers:
+      - name: flaskmonitor
+        image: prashasthnaik/flaskapp:latest
+        ports:
+        - containerPort: 5070
