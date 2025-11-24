@@ -1,4 +1,3 @@
-
 #!/bin/bash
 sudo apt install python3 -y
 sudo apt-get install python3-venv -y
